@@ -1,0 +1,6 @@
+numpy==1.24.3
+assemblyai
+transformers
+torch
+sentencepiece
+protobuf
