@@ -50,7 +50,7 @@ async def create_upload_file(file: UploadFile = Form(...),email:str=Form(...), d
     return {"file_name":file_name,"transcribed_text":transcript,"summarized_text":summarized}
 
 @router.post("/yt/" ,response_model=dict)
-async def create_upload_file(link:str,email:str="arseven@gmail.com",db: Session = Depends(database.get_db)):
+async def create_upload_file(link:str=Form(...),email:str=Form(...),db: Session = Depends(database.get_db)):
 
     user = db.query(models.FileDetails).filter(
     models.FileDetails.email == email).first()
@@ -73,8 +73,8 @@ async def create_upload_file(link:str,email:str="arseven@gmail.com",db: Session 
     return {"transcribed_text":transcript,"summarized_text":summarized}
         
 
-@router.get("/all_file/" ,response_model=dict)
-async def get_user_details(email:str,db: Session = Depends(database.get_db),):
+@router.post("/all_file/" ,response_model=dict)
+async def get_user_details(email:str=Form(...),db: Session = Depends(database.get_db),):
 
     user = db.query(models.FileDetails).filter(models.FileDetails.email == email).first()
 
@@ -97,8 +97,8 @@ async def get_user_details(email:str,db: Session = Depends(database.get_db),):
     else:
         return None
 
-@router.get("/specific/" ,response_model=dict)
-async def get_user_details(file_id:str,db: Session = Depends(database.get_db),):
+@router.post("/specific/" ,response_model=dict)
+async def get_user_details(file_id:str=Form(...),db: Session = Depends(database.get_db),):
 
     user = db.query(models.AudioSummary).filter(models.AudioSummary.id == file_id).first()
 
