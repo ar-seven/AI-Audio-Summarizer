@@ -1,0 +1,172 @@
+import React, { useRef, useState } from "react";
+import { IoMdCloudUpload } from "react-icons/io";
+import { MdCloudDownload } from "react-icons/md";
+import { IoDocumentTextSharp } from "react-icons/io5";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+const FileUploader = ({ loading, setLoading }) => {
+  const hiddenFileInput = useRef(null);
+  const downloadButton = useRef(null);
+
+  const [downloadHref, setDownloadHref] = useState("");
+  const [transcribedText, setTranscribedText] = useState("");
+  const [summarizedText, setSummarizedText] = useState("");
+  const [displayTranscribed, setDisplayTranscribed] = useState(true);
+  const [uploadClicked, setUploadClicked] = useState(false);
+
+  const handleClick = async (event) => {
+    hiddenFileInput.current.click();
+  };
+  //   try {
+  //     setLoading(true);
+
+  //     // Generate custom long texts for testing (replace with actual data)
+  //     const fakeTranscribedText =
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim facilisis gravida neque convallis a. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Justo laoreet sit amet cursus sit amet dictum. Euismod in pellentesque massa placerat duis ultricies. A diam sollicitudin tempor id eu nisl nunc mi ipsum. Cras ornare arcu dui vivamus arcu felis bibendum. Pretium nibh ipsum consequat nisl vel pretium lectus. Odio tempor orci dapibus ultrices in iaculis. Tellus mauris a diam maecenas sed enim. Etiam sit amet nisl purus in mollis nunc sed. Urna nunc id cursus metus aliquam eleifend mi in nulla. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Purus ut faucibus pulvinar elementum integer. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo. Habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat. Tempus egestas sed sed risus pretium quam vulputate dignissim. Massa id neque aliquam vestibulum. Augue ut lectus arcu bibendum at varius. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Tortor at risus viverra adipiscing at. Cursus turpis massa tincidunt dui ut ornare lectus sit. Ut tortor pretium viverra suspendisse potenti nullam ac tortor. Eget nulla facilisi etiam dignissim diam. Etiam erat velit scelerisque in dictum. Diam ut venenatis tellus in metus vulputate. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Iaculis nunc sed augue lacus viverra vitae. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Tellus mauris a diam maecenas sed. Nullam ac tortor vitae purus faucibus. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. Amet cursus sit amet dictum sit amet justo donec. Tellus mauris a diam maecenas sed enim ut sem viverra. Etiam sit amet nisl purus in. Volutpat diam ut venenatis tellus in metus vulputate eu. Eget velit aliquet sagittis id consectetur purus ut faucibus. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sem viverra aliquet eget sit amet tellus. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Interdum posuere lorem ipsum dolor sit amet consectetur. Leo urna molestie at elementum eu facilisis. Non nisi est sit amet facilisis magna. Dictum non consectetur a erat nam at. Eleifend mi in nulla posuere sollicitudin aliquam. Convallis posuere morbi leo urna molestie at elementum. Parturient montes nascetur ridiculus mus mauris vitae ultricies. Enim diam vulputate ut pharetra sit amet aliquam id.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim facilisis gravida neque convallis a. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Justo laoreet sit amet cursus sit amet dictum. Euismod in pellentesque massa placerat duis ultricies. A diam sollicitudin tempor id eu nisl nunc mi ipsum. Cras ornare arcu dui vivamus arcu felis bibendum. Pretium nibh ipsum consequat nisl vel pretium lectus. Odio tempor orci dapibus ultrices in iaculis. Tellus mauris a diam maecenas sed enim. Etiam sit amet nisl purus in mollis nunc sed. Urna nunc id cursus metus aliquam eleifend mi in nulla. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Purus ut faucibus pulvinar elementum integer. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo. Habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat. Tempus egestas sed sed risus pretium quam vulputate dignissim. Massa id neque aliquam vestibulum. Augue ut lectus arcu bibendum at varius. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Tortor at risus viverra adipiscing at. Cursus turpis massa tincidunt dui ut ornare lectus sit. Ut tortor pretium viverra suspendisse potenti nullam ac tortor. Eget nulla facilisi etiam dignissim diam. Etiam erat velit scelerisque in dictum. Diam ut venenatis tellus in metus vulputate. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Iaculis nunc sed augue lacus viverra vitae. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Tellus mauris a diam maecenas sed. Nullam ac tortor vitae purus faucibus. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. Amet cursus sit amet dictum sit amet justo donec. Tellus mauris a diam maecenas sed enim ut sem viverra. Etiam sit amet nisl purus in. Volutpat diam ut venenatis tellus in metus vulputate eu. Eget velit aliquet sagittis id consectetur purus ut faucibus. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sem viverra aliquet eget sit amet tellus. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Interdum posuere lorem ipsum dolor sit amet consectetur. Leo urna molestie at elementum eu facilisis. Non nisi est sit amet facilisis magna. Dictum non consectetur a erat nam at. Eleifend mi in nulla posuere sollicitudin aliquam. Convallis posuere morbi leo urna molestie at elementum. Parturient montes nascetur ridiculus mus mauris vitae ultricies. Enim diam vulputate ut pharetra sit amet aliquam id.   ";
+  //     const fakeSummarizedText =
+  //       "Enim facilisis gravida neque convallis a. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Justo laoreet sit amet cursus sit amet dictum. Euismod in pellentesque massa placerat duis ultricies. A diam sollicitudin tempor id eu nisl nunc mi ipsum. Cras ornare arcu dui vivamus arcu felis bibendum. Pretium nibh ipsum consequat nisl vel pretium lectus. Odio tempor orci dapibus ultrices in iaculis. Tellus mauris a diam maecenas sed enim. Etiam sit amet nisl purus in mollis nunc sed. Urna nunc id cursus metus aliquam eleifend mi in nulla. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Purus ut faucibus pulvinar elementum integer. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo. Habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat. Tempus egestas sed sed risus pretium quam vulputate dignissim. Massa id neque aliquam vestibulum. Augue ut lectus arcu bibendum at varius. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Tortor at risus viverra adipiscing at. Cursus turpis massa tincidunt dui ut ornare lectus sit. Ut tortor pretium viverra suspendisse potenti nullam ac tortor. Eget nulla facilisi etiam dignissim diam. Etiam erat velit scelerisque in dictum. Diam ut venenatis tellus in metus vulputate. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Iaculis nunc sed augue lacus viverra vitae. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Tellus mauris a diam maecenas sed. Nullam ac tortor vitae purus faucibus. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. Amet cursus sit amet dictum sit amet justo donec. Tellus mauris a diam maecenas sed enim ut sem viverra. Etiam sit amet nisl purus in. Volutpat diam ut venenatis tellus in metus vulputate eu. Eget velit aliquet sagittis id consectetur purus ut faucibus. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sem viverra aliquet eget sit amet tellus. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Interdum posuere lorem ipsum dolor sit amet consectetur. Leo urna molestie at elementum eu facilisis. Non nisi est sit amet facilisis magna. Dictum non consectetur a erat nam at. Eleifend mi in nulla posuere sollicitudin aliquam. Convallis posuere morbi leo urna molestie at elementum. Parturient montes nascetur ridiculus mus mauris vitae ultricies. Enim diam vulputate ut pharetra sit amet aliquam id.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim facilisis gravida neque convallis a. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Justo laoreet sit amet cursus sit amet dictum. Euismod in pellentesque massa placerat duis ultricies. A diam sollicitudin tempor id eu nisl nunc mi ipsum. Cras ornare arcu dui vivamus arcu felis bibendum. Pretium nibh ipsum consequat nisl vel pretium lectus. Odio tempor orci dapibus ultrices in iaculis. Tellus mauris a diam maecenas sed enim. Etiam sit amet nisl purus in mollis nunc sed. Urna nunc id cursus metus aliquam eleifend mi in nulla. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Purus ut faucibus pulvinar elementum integer. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo. Habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat. Tempus egestas sed sed risus pretium quam vulputate dignissim. Massa id neque aliquam vestibulum. Augue ut lectus arcu bibendum at varius. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Tortor at risus viverra adipiscing at. Cursus turpis massa tincidunt dui ut ornare lectus sit. Ut tortor pretium viverra suspendisse potenti nullam ac tortor. Eget nulla facilisi etiam dignissim diam. Etiam erat velit scelerisque in dictum. Diam ut venenatis tellus in metus vulputate. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Iaculis nunc sed augue lacus viverra vitae. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Tellus mauris a diam maecenas sed. Nullam ac tortor vitae purus faucibus. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. Amet cursus sit amet dictum sit amet justo donec. Tellus mauris a diam maecenas sed enim ut sem viverra. Etiam sit amet nisl purus in. Volutpat diam ut venenatis tellus in metus vulputate eu. Eget velit aliquet sagittis id consectetur purus ut faucibus. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sem viverra aliquet eget sit amet tellus. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Interdum posuere lorem ipsum dolor sit amet consectetur. Leo urna molestie at elementum eu facilisis. Non nisi est sit amet facilisis magna. Dictum non consectetur a erat nam at. Eleifend mi in nulla posuere sollicitudin aliquam. Convallis posuere morbi leo urna molestie at elementum. Parturient montes nascetur ridiculus mus mauris vitae ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim diam vulputate ut pharetra sit amet aliquam id.";
+
+  //     // Set the transcribed and summarized text states
+  //     setTranscribedText(fakeTranscribedText);
+  //     setSummarizedText(fakeSummarizedText);
+
+  //     setUploadClicked(true);
+
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const handleChange = async (event) => {
+    try {
+      setLoading(true);
+      let formData = new FormData();
+      formData.append("file", event.target.files[0]);
+
+      const result1 = await fetch('http://localhost:5000/submit', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+
+      const data = await result1.json();
+      let filename = data.filename.split('.')[0];
+
+      const result2 = await fetch(`http://localhost:5000/file/${filename}`);
+
+      let file = await result2.blob();
+      const url = window.URL.createObjectURL(file);
+      console.log(url);
+      setDownloadHref(url);
+
+      // Your existing fetch logic here...
+
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const toggleTextDisplay = () => {
+    setDisplayTranscribed(!displayTranscribed);
+  };
+
+  return (
+    
+    <div className="items-center">
+      <button
+        type="submit"
+        onClick={handleClick}
+        className="inline-flex text-white font-bold bg-indigo-600 border-0 py-2 px-4 mr-4 focus:outline-none hover:bg-indigo-800 rounded text-lg"
+      >
+        {/* {!loading ? ( */}
+          <span className="flex items-center text-xl justify-center">
+            Upload a file <IoMdCloudUpload className="ml-2 text-4xl" />
+          </span>
+          </button>
+      
+        {/* ) : ( */}
+          {/* <div className="flex flex-row items-center">
+            <svg
+              role="status"
+              className="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* (your existing SVG paths) */}
+            {/* </svg> */}
+            {/* <p className="flex items-center text-xl py-1 justify-center">Processing...</p> */}
+          {/* // </div> */} 
+        {/* // )} */}
+
+      <button
+        className="inline-flex text-white font-bold bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-800 rounded text-lg"
+        disabled={downloadHref}
+      >
+        <a
+          href={downloadHref}
+          ref={downloadButton}
+          download
+          className="text-xl"
+        >
+          <span className="flex items-center text-xl justify-center">
+            Download <MdCloudDownload className="ml-2 text-4xl" />
+          </span>
+        </a>
+      </button>
+
+      <input
+        type="file"
+        ref={hiddenFileInput}
+        onChange={handleChange}
+        className="hidden"
+      />
+
+      {uploadClicked && (
+        <button
+          onClick={toggleTextDisplay}
+          className="flex text-white font-bold mt-6 mr-4 bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-800 rounded text-lg"
+          disabled={downloadHref}
+        >
+          {displayTranscribed ? (
+            <span className="flex items-center text-xl justify-center">
+              <IoDocumentTextSharp className="mr-2 text-4xl" />
+              Show Summarized Text
+            </span>
+          ) : (
+            <span className="flex items-center text-xl justify-center">
+              <IoDocumentTextSharp className="mr-2 text-4xl" />
+              Show Transcribed Text
+            </span>
+          )}
+        </button>
+      )}
+
+      {/* Display transcribed or summarized text */}
+      {(displayTranscribed ? transcribedText : summarizedText) && (
+        <div className="mt-4">
+          <h3 className="text-4xl text-indigo-700 mt-8 font-bold mb-6">
+            {displayTranscribed ? "Transcribed Text:" : "Summarized Text:"}
+          </h3>
+          <div
+            className="overflow-auto max-h-screen text-xl font-bold"
+            // style={{
+            //   boxShadow: "0 0 15px rgba(70, 0, 130, 1)",
+            //   border: "2px solid #fff",
+            // }}
+          >
+            {displayTranscribed ? transcribedText : summarizedText}
+          </div>
+        </div>
+      )}
+
+      {/* Toggle button */}
+    </div>
+  );
+};
+
+export default FileUploader;
