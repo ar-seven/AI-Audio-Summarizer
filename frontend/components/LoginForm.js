@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../pages/AuthContext";
 
-const LoginForm = () => {
-  const { login } = useAuth(); // Use the useAuth hook
+const LoginForm = ({ onLogin }) => {
+  const { login, setEmail } = useAuth(); // Use the useAuth hook
   const [error, setError] = useState(""); // State for error message
 
   const [formData, setFormData] = useState({
@@ -20,6 +20,7 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log(formData.email);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/login/", {
@@ -37,9 +38,11 @@ const LoginForm = () => {
       // Call the login function from useAuth to update the authentication status
       login();
 
+      setEmail(formData.email);
+
       // Assuming onLogin is a function prop for handling login logic
       // You might want to call onLogin with the user data if needed
-      // onLogin(formData);
+      onLogin(formData);
 
       // Clear any previous error on successful login
       setError("");

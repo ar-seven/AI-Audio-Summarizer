@@ -4,10 +4,12 @@ import { MdCloudDownload } from "react-icons/md";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaLink } from "react-icons/fa";
+import { useAuth } from "../pages/AuthContext";
 
 const FileUploader = ({ loading, setLoading }) => {
   const hiddenFileInput = useRef(null);
   const downloadButton = useRef(null);
+  const {email} = useAuth();
 
   const [downloadHref, setDownloadHref] = useState("");
   const [transcribedText, setTranscribedText] = useState("");
@@ -25,15 +27,18 @@ const FileUploader = ({ loading, setLoading }) => {
       setLoading(true);
 
       // Handle link input
-      const link = linkInput.trim();
+      let formData = new FormData();
+      formData.append("link", linkInput);
+      formData.append("email",email);
+      // const link = linkInput.trim();
 
-      if (link !== "") {
-        const response = await fetch("http://localhost:8000/summarize/", {
+      if (linkInput.length > 0) {
+        const response = await fetch("http://localhost:8000/summarize/yt/", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ link }),
+          // headers: {
+          //   "Content-Type": "application/json",
+          
+          body: formData
         });
 
         if (response.ok) {
@@ -62,7 +67,7 @@ const FileUploader = ({ loading, setLoading }) => {
         // Handle file input
         let formData = new FormData();
         formData.append("file", event.target.files[0]);
-
+        formData.append("email",email);
         const response = await fetch("http://localhost:8000/summarize/", {
           method: "POST",
           body: formData,

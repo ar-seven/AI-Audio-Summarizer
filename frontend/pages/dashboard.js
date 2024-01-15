@@ -36,7 +36,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex flex-row justify-center mb-24">
-          <FileUploader loading={loading} setLoading={setLoading} />
+          <FileUploader loading={loading} setLoading={setLoading}  />
         </div>
 
         {afterUpload && !loading && (
