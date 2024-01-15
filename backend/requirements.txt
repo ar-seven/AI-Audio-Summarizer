@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+python-multipart
+youtube-transcript-api
+openai-whisper
+bert-extractive-summarizer
+nltk
+moviepy
