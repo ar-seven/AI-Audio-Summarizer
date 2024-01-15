@@ -5,7 +5,7 @@ import { IoDocumentTextSharp } from "react-icons/io5";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaLink } from "react-icons/fa";
 import { useAuth } from "../pages/AuthContext";
-
+import ReactHtmlParser from 'react-html-parser';
 const FileUploader = ({ loading, setLoading }) => {
   const hiddenFileInput = useRef(null);
   const downloadButton = useRef(null);
@@ -77,6 +77,9 @@ const FileUploader = ({ loading, setLoading }) => {
           const data = await response.json();
           setTranscribedText(data.transcribed_text);
           setSummarizedText(data.summarized_text);
+
+          
+
           setDownloadHref(data.download_url);
           setUploadClicked(true);
         } else {
@@ -97,11 +100,11 @@ const FileUploader = ({ loading, setLoading }) => {
 
   return (
     <div className="flex-col justify-start items-start">
-      {uploadClicked && !loading && (
+      {/* {uploadClicked && !loading && (
         <p className="flex-row text-center text-black font-bold mb-6 text-xl">
           Done!
         </p>
-      )}
+      )} */}
 
       <div className="flex items-start mb-4" >
         <input
@@ -174,8 +177,9 @@ const FileUploader = ({ loading, setLoading }) => {
             {displayTranscribed ? "Transcribed Text:" : "Summarized Text:"}
           </h3>
           <div className="overflow-auto max-h-screen text-xl font-bold">
-            {displayTranscribed ? transcribedText : summarizedText}
+            {displayTranscribed ?   ReactHtmlParser(transcribedText) : ReactHtmlParser(summarizedText)}
           </div>
+
         </div>
       )}
     </div>
